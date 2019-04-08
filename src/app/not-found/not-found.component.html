@@ -1,0 +1,12 @@
+<nav class="navbar navbar-light bg-light">
+  <img class="avatar" alt="Logo" />
+
+  <div class="my-2 my-sm-0">
+    <a class="navbar-brand" *ngIf="currentUser"></a>
+    <button class="btn btn-outline-success" routerLink="/login">Login</button>
+  </div>
+</nav>
+
+<div *ngIf="type && content">
+  <h2>User with {{ type }} "{{ content }}" not found</h2>
+</div>

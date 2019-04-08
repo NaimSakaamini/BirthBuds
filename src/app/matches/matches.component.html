@@ -1,0 +1,53 @@
+`
+<nav class="navbar navbar-light bg-light">
+  <a *ngIf="currentUser" routerLink="/matches/{{ currentUser.Email }}">
+    <img
+      class="avatar"
+      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ8NDQ0NFREWFhURExMYHSggGBoxGxMVITEhJSk3Ljo6Fx8zODM4NygtLjcBCgoKDQ0NDg0NDy0ZFRkrKy0rNysrKys3Ny03KzctKy0tNzcrLSs3LS0rLSsrKy0tLTcrKysrKysrKysrKysrK//AABEIALcBEwMBIgACEQEDEQH/xAAbAAEBAQEBAQEBAAAAAAAAAAABAAIDBQYEB//EABgQAQEBAQEAAAAAAAAAAAAAAAARARIC/8QAGgEBAQEAAwEAAAAAAAAAAAAAAAEDBAUGAv/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oADAMBAAIRAxEAPwD+fhoPSOtCOhAIoUAoAkkEkgQKAJJBAgVJIECgCSBJJBAoAigCSBJIBEUD9IaUaPlkNRQGCYIARCARQoBQBJIJJAEQggUARAqSQJJAEQCSSCSQIFAkogfrgjSbM2YI0EVmKNAVlEIDRGhACKQZUKFEUIAIpAJIFBCtQAKVQiEEkgQKAJIEkgSSRX7oI68iNmTnBHSDcBzgjpBAYgjcURWII3BAZgjcGorEUaAMpoIAa1AADQgoDUEAIqIBIgEkihJAEUASQJJCvU3WSmzJnRrUEBkNQIM6GgDKaArKIBDcK1FZEKAApBlFAEkKEQgEUABQBJIoRQBEIBGJR6cUaDZkzBGgDIaQrA1vcEQYTUEBkNQIMpqCCsqNQAymgigNQQGUYoDKaCDKMQoRgAIpBlGKAEYIigqIHrQbjpGY3YsQRvcG4DEEbggrEEbgiDMEaigrEEbgiDMEbggMRRqAGYmhEVkNRQGQ1AADSRWImlAZEaiBmIqIoRACIxAEUD2II6bg3G7Fzg3G9wbiDnuCOkEFc4I6bgiDEEbggrEDcEQrMEaigrEEbggMRNwQGImoNxBmCNwCswRuMxBlRqAVlRqBAQNKAyGgARUAIoV7kW+XSDcbsHLcG467jO4g5QR13BBXKDcdNwQHPcEdNwRFcoI6xncBiCNwbiDEEbggrMGtRQVjQ3BEGYI1FAYgbgiDMEaigrMEaQMRRqKIMRRqCCspqIGYmkg+hjO47bjO43YuUZ5dozActwbjruM7gOW4I6bggOe4I6bgiDlBHXcZgrnBuOkG4DnBHSCIrnuCOm4IK5wR03BEHOCOm4IKxBG4IDMEaiiDEUaigMQRuCAzFGoIKzBG4IgzE1EK+l3BuOm4I2cdy3Gdx1g3BXLcEddxncBy3BuOm4IK5b5HLruM7iDnGY67jO4DnBHSCCucEdIIg5wR0ggOe4I6QQVzg3HSCA5wR0giK5wR0ggOcUb3BEViKNwQGII3FAYgjcEQZhMRFfURncSbOOzuDcSRRuM7hQM7jO4kKNwbgQo3BuJAIzuJAIIkijcG4kA3BEgEESQEESFEESAQRJFEESFUCQCBJAVJCv/Z"
+      alt="Logo"
+    />
+  </a>
+
+  <div class="my-2 my-sm-0" *ngIf="currentUser">
+    <a class="navbar-brand">
+      Welcome {{ currentUser.FirstName }} {{ currentUser.LastName }}</a
+    >
+    <button class="btn btn-outline-success" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="center">
+  <h2>Matches</h2>
+  <p class="lead" *ngIf="currentUser">
+    Your were born on {{ currentUser.DOB | date: "longDate":"UTC" }} at
+    {{ currentUser.Hospital }} Hospital in {{ currentUser.City }},
+    {{ currentUser.Country }}
+  </p>
+</div>
+<div class="container" *ngIf="currentUser">
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+      <p *ngIf="users.length > 0">
+        {{ users.length }} {{ users.length == 1 ? "match" : "matches" }} found!
+      </p>
+      <div class="table-responsive">
+        <table class="table table-condensed table-hover">
+          <tbody>
+            <tr *ngFor="let user of users" (click)="showUser(user._id)">
+              <td>
+                <img class="avatar" src="{{ user.Photo }}" alt="Avatar" />
+              </td>
+              <td>
+                <h3>{{ user.FirstName }} {{ user.LastName }}</h3>
+              </td>
+            </tr>
+            <tr *ngIf="users.length < 1">
+              <td>No Matches Found :(</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

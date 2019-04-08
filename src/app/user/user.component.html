@@ -1,0 +1,77 @@
+<nav class="navbar navbar-light bg-light">
+  <img class="avatar" alt="Logo" />
+
+  <div class="my-2 my-sm-0">
+    <a class="navbar-brand" *ngIf="currentUser">
+      Welcome {{ currentUser.FirstName }} {{ currentUser.LastName }}</a
+    >
+    <button class="btn btn-outline-success" routerLink="/matches">
+      Return to Match List
+    </button>
+    <button class="btn btn-outline-success" routerLink="/logout">Logout</button>
+  </div>
+</nav>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"
+></script>
+
+<div class="container details" *ngIf="user">
+  <div class="card text-center">
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <img
+          *ngIf="user.Photo"
+          src="{{ user.Photo }}"
+          alt=""
+          class="img-rounded img-fluid"
+        />
+        <img
+          *ngIf="!user.Photo"
+          src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+          alt=""
+          class="img-rounded img-fluid"
+        />
+      </div>
+      <div class="col-sm-6 col-md-8">
+        <h4>{{ user.FirstName }} {{ user.LastName }}</h4>
+        <div>
+          <p>{{ user.About }}</p>
+        </div>
+        <small
+          ><cite title="San Francisco, USA"
+            >{{ user.City }},{{ user.Country }}
+            <i class="glyphicon glyphicon-map-marker"> </i></cite
+        ></small>
+        <p>
+          <i class="glyphicon glyphicon-envelope"></i>{{ user.Email }}
+          <br />
+
+          <i class="glyphicon glyphicon-gift"></i
+          >{{ user.DOB | date: "longDate":"UTC" }}
+        </p>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary">
+            Social
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+          ></button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
